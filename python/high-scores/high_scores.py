@@ -1,7 +1,6 @@
 class HighScores:
     def __init__(self, scores: list[int]):
-        self.scores = []
-        self.scores.extend(scores)
+        self.scores = scores
        
     def personal_top_three(self) -> list[int]:
         return sorted(self.scores, reverse=True)[:3]
