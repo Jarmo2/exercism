@@ -32,15 +32,12 @@ class Robot:
     def coordinates(self):
         return (self.x_pos, self.y_pos)
 
-
     def move(self, move_request: str) -> None:
         for element in move_request:
             if element != 'A':
                 self.direction = DIRECTIONS[self.direction][element]
             else:
-                offset = OFFSET[self.direction]
-                self.combine(offset)
-
-    def combine(self, offset: tuple) -> None:
-        self.x_pos += offset[0]
-        self.y_pos += offset[1]
+                increase_x, increase_y = OFFSET[self.direction]
+                self.x_pos += increase_x
+                self.y_pos += increase_y
+                
