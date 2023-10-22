@@ -1,35 +1,25 @@
+from collections import defaultdict
+
 NAME = 'name'
 GRADE = 'grade'
 
 
 class School:
     def __init__(self):
-        self.students = []
+        self.students_in_grades = defaultdict(set)
         self.add_status = []
 
     def add_student(self, name: str, grade: int) -> None:
-        if len(self.students) == 0:
-            self.students.append(
-            {NAME: name,
-            GRADE: grade}
-        )
-            self.add_status.append(True)
-        else:
-            if all(d[NAME] != name or d[NAME] != name and d[GRADE] != grade for d in self.students):
-                self.students.append(
-                {NAME: name,
-                 GRADE: grade}
-            )
-                self.add_status.append(True)
-            else:
-                self.add_status.append(False)
+        student_to_add = not any(name in sublist for sublist in self.students_in_grades.values())
+        if student_to_add:
+            self.students_in_grades[grade].add(name)
+        self.add_status.append(student_to_add)
 
     def roster(self) -> list[str]:
-        sorted_students = sorted(self.students, key=lambda k: (k['grade'], k['name']))
-        return [student[NAME] for student in sorted_students]
+        return [student for grade in sorted(self.students_in_grades) for student in sorted(self.students_in_grades[grade])]
 
     def grade(self, grade_number: int) -> list[str]:
-        return sorted([student[NAME] for student in self.students if student[GRADE] == grade_number])
+        return sorted(self.students_in_grades[grade_number])
 
     def added(self) -> list[bool]:
         return self.add_status
