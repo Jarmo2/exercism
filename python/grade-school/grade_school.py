@@ -1,8 +1,5 @@
 from collections import defaultdict
 
-NAME = 'name'
-GRADE = 'grade'
-
 
 class School:
     def __init__(self):
