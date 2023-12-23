@@ -22,6 +22,7 @@ def best_hands(hands: list[str]) -> list[str]:
     index_winner, outcome_winner = mult_occur(hands_num)
     # four of a kind
     if outcome_winner == 'four_of_a_kind':
+
         return [hands[index_winner]]
 
     # full house
@@ -116,7 +117,7 @@ def mult_occur(hand_nums: list[str]):
         outcome = 'three_of_a_kind'
     elif any(2 in counter.values() for counter in counted_hands):
         outcome = 'pairs'
-
+    print(max_hand_rep)
     if len(max_hand_rep) == len(set(max_hand_rep)):
         hand_seq = max_hand_rep.index(max_rep_value)
         return hand_seq, outcome
@@ -129,7 +130,7 @@ def mult_occur(hand_nums: list[str]):
                     if item == max_rep_value:
                         count_num += 1
                 check_tie.append(count_num)
-
+            ### hier anpassen print(max(check_tie))
             if any(element != max(check_tie) for element in check_tie):
                 return check_tie.index(max(check_tie)), outcome
 
@@ -146,4 +147,4 @@ def mult_occur(hand_nums: list[str]):
 
 
 
-print(best_hands(["2S QS 2C QD JH", "JD QH JS 8D QC"]))
+print(best_hands(["3S 3H 2S 3D 3C", "3S 3H 4S 3D 3C"]))

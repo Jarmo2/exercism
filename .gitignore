@@ -1,0 +1,4 @@
+python/pop-count/.idea/
+**/__pycache__/
+**/.exercism/
+*.xml
